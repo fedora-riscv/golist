@@ -3,7 +3,8 @@
 
 # https://pagure.io/golist
 %global goipath         pagure.io/golist
-%global forgeurl        https://pagure.io/golist
+# This is the real URL, but F29 forge macros don't support it.
+#global forgeurl        https://pagure.io/golist
 Version:                0.10.0
 
 %gometa
