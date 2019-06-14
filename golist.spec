@@ -11,8 +11,11 @@ Version:                0.10.0
 %global common_description %{expand:
 A tool to analyse the properties of a Go (Golang) codebase.}
 
+%global godocs          NEWS.md README.md
+%global golicenses      LICENSE
+
 Name:           golist
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A tool to analyse the properties of a Go (Golang) codebase
 
 # Upstream license specification: BSD-3-Clause
@@ -32,34 +35,35 @@ Conflicts: go-compilers-golang-compiler < 1-34
 
 
 %prep
-#forgeautosetup -p1
-%autosetup -p1 -n golist-%{version}
+%goprep
 
 
 %build
-%gobuildroot
 for cmd in cmd/* ; do
-  %gobuild -o _bin/$(basename $cmd) %{goipath}/$cmd
+  %gobuild -o %{gobuilddir}/bin/$(basename $cmd) %{goipath}/$cmd
 done
 
 
 %install
 install -m 0755 -vd                     %{buildroot}%{_bindir}
-install -m 0755 -vp _bin/*              %{buildroot}%{_bindir}/
+install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_bindir}/
 
 
 %if %{with check}
 %check
-%gochecks
+%gocheck
 %endif
 
 
 %files
-%doc NEWS.md README.md
+%doc README.md NEWS.md
 %license LICENSE
 %{_bindir}/*
 
 
 %changelog
+* Fri Jun 14 16:03:20 EDT 2019 Elliott Sales de Andrade <quantum.analyst@gmail.com> - 0.10.0-2
+- Rewrite for latest Go macros
+
 * Mon May 27 01:19:35 EDT 2019 Elliott Sales de Andrade <quantum.analyst@gmail.com> - 0.10.0-1
 - Initial package
