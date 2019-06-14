@@ -4,7 +4,7 @@
 # https://pagure.io/golist
 %global goipath         pagure.io/golist
 %global forgeurl        https://pagure.io/golist
-Version:                0.10.0
+Version:                0.10.1
 
 %gometa
 
@@ -15,7 +15,7 @@ A tool to analyse the properties of a Go (Golang) codebase.}
 %global golicenses      LICENSE
 
 Name:           golist
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        A tool to analyse the properties of a Go (Golang) codebase
 
 # Upstream license specification: BSD-3-Clause
@@ -62,7 +62,8 @@ install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_bindir}/
 
 
 %changelog
-* Fri Jun 14 16:03:20 EDT 2019 Elliott Sales de Andrade <quantum.analyst@gmail.com> - 0.10.0-2
+* Fri Jun 14 16:03:20 EDT 2019 Elliott Sales de Andrade <quantum.analyst@gmail.com> - 0.10.1-1
+- Update to latest version
 - Rewrite for latest Go macros
 
 * Mon May 27 01:19:35 EDT 2019 Elliott Sales de Andrade <quantum.analyst@gmail.com> - 0.10.0-1
