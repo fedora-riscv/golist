@@ -15,7 +15,7 @@ A tool to analyse the properties of a Go (Golang) codebase.}
 %global golicenses      LICENSE
 
 Name:           golist
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        A tool to analyse the properties of a Go (Golang) codebase
 
 # Upstream license specification: BSD-3-Clause
@@ -62,6 +62,9 @@ install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_bindir}/
 
 
 %changelog
+* Mon Dec 20 2021 Maxwell G <gotmax@e.email> - 0.10.1-7
+- Rebuild for new go version. Related: rhbz#2033978
+
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.10.1-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
