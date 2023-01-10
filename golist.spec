@@ -6,8 +6,6 @@
 %global forgeurl        https://pagure.io/golist
 Version:                0.10.1
 
-%gometa
-
 %global common_description %{expand:
 A tool to analyse the properties of a Go (Golang) codebase.}
 
@@ -15,16 +13,16 @@ A tool to analyse the properties of a Go (Golang) codebase.}
 %global golicenses      LICENSE
 
 Name:           golist
-Release:        11%{?dist}
+Release:        11.rv64~bootstrap%{?dist}
 Summary:        A tool to analyse the properties of a Go (Golang) codebase
 
 # Upstream license specification: BSD-3-Clause
 License:        BSD
 URL:            %{gourl}
 #Source0:        #{gosource}  # Not supported by current forge macros.
-Source0:        https://pagure.io/golist/archive/v%{version}/golist-%{version}.tar.gz
+#Source0:        https://pagure.io/golist/archive/v%{version}/golist-%{version}.tar.gz
+Source0:        golist
 
-BuildRequires:  golang(github.com/urfave/cli)
 
 # Before split of /usr/bin/golist.
 # Remove in Fedora 34.
@@ -35,33 +33,31 @@ Conflicts: go-compilers-golang-compiler < 1-34
 
 
 %prep
-%goprep
+:
 
 
 %build
-for cmd in cmd/* ; do
-  %gobuild -o %{gobuilddir}/bin/$(basename $cmd) %{goipath}/$cmd
-done
-
+:
 
 %install
 install -m 0755 -vd                     %{buildroot}%{_bindir}
-install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_bindir}/
+install -m 0755 -vp %{SOURCE0}  %{buildroot}%{_bindir}/
 
 
 %if %{with check}
 %check
-%gocheck
+:
 %endif
 
 
 %files
-%doc README.md NEWS.md
-%license LICENSE
 %{_bindir}/*
 
 
 %changelog
+* Tue Jan 10 2023 Liu Yang <Yang.Liu.sn@gmail.com> - 0.10.1-11.rv64~bootstrap
+- Cross compile binary file for riscv64 bootstrap.
+
 * Thu Jul 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 0.10.1-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
 
